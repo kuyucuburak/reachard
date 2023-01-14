@@ -25,40 +25,6 @@ task androidSourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                groupId = 'com.burakkuyucu'
-                artifactId = 'reachard-di'
-                version = reachardDiVersionName
-
-                afterEvaluate {
-                    from components.release
-                    artifact androidJavadocsJar
-                    artifact androidSourcesJar
-                    artifact "$buildDir/outputs/aar/reachard-di-release.aar"
-                }
-            }
-        }
-
-        repositories {
-            maven {
-                def propertiesFile = rootProject.file('github.properties')
-                def properties = new Properties()
-
-                properties.load(new FileInputStream(propertiesFile))
-                name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/kuyucuburak/Reachard")
-                credentials {
-                    username properties['username']
-                    password properties['token']
-                }
-            }
-        }
-    }
-}
-
 android {
     namespace 'com.burakkuyucu.reachard'
     compileSdk 33
@@ -66,6 +32,8 @@ android {
     defaultConfig {
         minSdkVersion 1
         targetSdkVersion 33
+
+        consumerProguardFiles("consumer-proguard-rules.pro")
     }
 
     buildTypes.all {
@@ -81,10 +49,33 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8
     }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+
     resourcePrefix "reachard_"
 }
 
 dependencies {
     // Unit Test
     testImplementation "junit:junit:${versions.junit}"
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId = 'com.kuyucuburak'
+                artifactId = 'Reacher'
+                version = reachardDiVersionName
+
+                afterEvaluate {
+                    from components.release
+                }
+            }
+        }
+    }
 }
