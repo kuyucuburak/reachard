@@ -1,0 +1,90 @@
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+    id 'org.jetbrains.kotlin.android'
+}
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    android.libraryVariants.all { variant ->
+        if (variant.name == 'release') {
+            owner.classpath += variant.javaCompileProvider.get().classpath
+        }
+    }
+    exclude '**/R.html', '**/R.*.html', '**/index.html'
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    archiveClassifier.set('javadoc')
+    from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId = 'com.burakkuyucu'
+                artifactId = 'reachard-di'
+                version = reachardDiVersionName
+
+                afterEvaluate {
+                    from components.release
+                    artifact androidJavadocsJar
+                    artifact androidSourcesJar
+                    artifact "$buildDir/outputs/aar/reachard-di-release.aar"
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                def propertiesFile = rootProject.file('github.properties')
+                def properties = new Properties()
+
+                properties.load(new FileInputStream(propertiesFile))
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/kuyucuburak/Reachard")
+                credentials {
+                    username properties['username']
+                    password properties['token']
+                }
+            }
+        }
+    }
+}
+
+android {
+    namespace 'com.burakkuyucu.reachard'
+    compileSdk 33
+
+    defaultConfig {
+        minSdkVersion 1
+        targetSdkVersion 33
+    }
+
+    buildTypes.all {
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    resourcePrefix "reachard_"
+}
+
+dependencies {
+    // Unit Test
+    testImplementation "junit:junit:${versions.junit}"
+}

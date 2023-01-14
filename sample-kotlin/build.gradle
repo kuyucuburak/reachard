@@ -1,0 +1,66 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.burakkuyucu.reachard.sample'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.burakkuyucu.reachard.sample"
+
+        minSdk rootProject.minSdk
+        targetSdk rootProject.targetSdk
+
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion versions.kotlinCompilerExtension
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+
+    resourcePrefix "reachard_"
+}
+
+dependencies {
+    implementation project(':reachard-di')
+    // AndroidX
+    implementation "androidx.core:core-ktx:${versions.ktx}"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}"
+    implementation "androidx.activity:activity-compose:1.6.1"
+
+    // Jetpack Compose
+    implementation platform("androidx.compose:compose-bom:${versions.composeBOM}")
+    implementation "androidx.compose.material3:material3"
+    implementation "androidx.compose.runtime:runtime-livedata"
+    implementation "androidx.compose.ui:ui"
+    implementation "androidx.compose.ui:ui-tooling"
+}
