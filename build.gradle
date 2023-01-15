@@ -9,7 +9,6 @@ buildscript {
         versionBuild = buildNumber
         versionCode = versionMajor * 10000000 + versionMinor * 100000 + versionPatch * 1000 + versionBuild
         versionName = "$versionMajor.$versionMinor.$versionPatch"
-        reachardDiVersionName = "1.0.0-alpha01"
 
         minSdk = 21
         targetSdk = 33
