@@ -54,7 +54,10 @@ class ReachardTest {
 
     @Test
     fun setDefaultValues() {
-        Reachard.setDefaultValues(PutConflictStrategy.UPDATE, PutConflictStrategy.CRASH)
+        Reachard.setDefaultValues(
+            defaultPutConflictStrategy = PutConflictStrategy.UPDATE,
+            defaultLazyPutConflictStrategy = PutConflictStrategy.CRASH
+        )
 
         assertEquals(Reachard.defaultPutConflictStrategy, PutConflictStrategy.UPDATE)
         assertEquals(Reachard.defaultLazyPutConflictStrategy, PutConflictStrategy.CRASH)
@@ -168,6 +171,26 @@ class ReachardTest {
 
         assertNotEquals(Reachard.get<Foo>(key = keyNormal1), fooNormal1)
         assertEquals(Reachard.get<Foo>(key = keyNormal1), fooTest)
+    }
+
+    @Test
+    fun remove_normalInstance() {
+        Reachard.remove<Foo>(keyNormal1)
+
+        assertEquals(Reachard.instanceCount, 1)
+        assertEquals(Reachard.lazyInstanceCount, 1)
+
+        assertEquals(Reachard.contains<Foo>(key = keyNormal1), false)
+    }
+
+    @Test
+    fun remove_lazyInstance() {
+        Reachard.remove<Foo>(keyForLazy)
+
+        assertEquals(Reachard.instanceCount, 2)
+        assertEquals(Reachard.lazyInstanceCount, 0)
+
+        assertEquals(Reachard.contains<Foo>(key = keyForLazy), false)
     }
 
     @Test

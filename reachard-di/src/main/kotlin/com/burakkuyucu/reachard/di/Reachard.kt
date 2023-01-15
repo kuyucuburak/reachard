@@ -115,6 +115,22 @@ object Reachard {
         instanceFactoryHolderList.add(newInstanceFactoryHolder)
     }
 
+    inline fun <reified T : Any> remove(key: String? = null) {
+        val instance = getInstanceHolder<T>(key)
+        if (instance != null) {
+            instanceHolderList.remove(instance)
+            return
+        }
+
+        val instanceFactory = getInstanceFactoryHolder<T>(key)
+        if (instanceFactory != null) {
+            instanceFactoryHolderList.remove(instanceFactory)
+            return
+        }
+
+        throw NoReachardInstanceFoundException()
+    }
+
     inline fun <reified T : Any> get(key: String? = null): T {
         val instance = getInstanceHolder<T>(key)
         if (instance != null) {
