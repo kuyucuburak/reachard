@@ -56,7 +56,7 @@ class ReachardTest {
     fun setDefaultValues() {
         Reachard.setDefaultValues(
             defaultPutConflictStrategy = PutConflictStrategy.UPDATE,
-            defaultLazyPutConflictStrategy = PutConflictStrategy.CRASH
+            defaultLazyPutConflictStrategy = PutConflictStrategy.CRASH,
         )
 
         assertEquals(Reachard.defaultPutConflictStrategy, PutConflictStrategy.UPDATE)
