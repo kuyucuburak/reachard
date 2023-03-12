@@ -6,7 +6,7 @@ Reachard is an Android library that let you put and "reach" your objects from ev
 
 # Attribution
 
-I inspried from a Flutter library called ![Getx](https://github.com/jonataslaw/getx). It contains a lot of utilitization. One of them is for a dependency injection management. It is very easy to manage you objects! I couldn't see a library in Android world and wanted to add it.
+I inspried from a Flutter library called [Getx](https://github.com/jonataslaw/getx). It contains a lot of utilitization. One of them is for a dependency injection management. It is very easy to manage you objects! I couldn't see a library in Android world and wanted to add it.
 
 ## Table of Contents
 
@@ -47,7 +47,7 @@ I inspried from a Flutter library called ![Getx](https://github.com/jonataslaw/g
 
 ```gradle
     dependencies {
-	    implementation 'com.github.kuyucuburak:Reachard:$reachardVersion'
+	    implementation "com.github.kuyucuburak:Reachard:$reachardVersion"
 	}
 ```
 
@@ -76,7 +76,7 @@ I inspried from a Flutter library called ![Getx](https://github.com/jonataslaw/g
 
 ## Documentation
 
-Reachard is very easy to use. All of details are explained below. Let's say that we have `PermissionUtils` and `TimeUtils` classes in our app.
+Reachard is very easy to use. All of details are explained below. Let's say that we have `TimeUtils` classes in our app.
 
 ### Put
 
