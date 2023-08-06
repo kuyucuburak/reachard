@@ -1,32 +1,33 @@
 plugins {
-    id 'com.android.library'
-    id 'maven-publish'
-    id 'org.jetbrains.kotlin.android'
+    id "com.android.library"
+    id "maven-publish"
+    id "org.jetbrains.kotlin.android"
 }
 
-task androidJavadocs(type: Javadoc) {
+tasks.register("androidJavadocs", Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    android.libraryVariants.all { variant ->
-        if (variant.name == 'release') {
+    android.libraryVariants.configureEach { variant ->
+        if (variant.name == "release") {
             owner.classpath += variant.javaCompileProvider.get().classpath
         }
     }
-    exclude '**/R.html', '**/R.*.html', '**/index.html'
+    exclude "**/R.html", "**/R.*.html", "**/index.html"
 }
 
-task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-    archiveClassifier.set('javadoc')
+tasks.register("androidJavadocsJar", Jar) {
+    dependsOn androidJavadocs
+    archiveClassifier.set("javadoc")
     from androidJavadocs.destinationDir
 }
 
-task androidSourcesJar(type: Jar) {
-    archiveClassifier.set('sources')
+tasks.register("androidSourcesJar", Jar) {
+    archiveClassifier.set("sources")
     from android.sourceSets.main.java.srcDirs
 }
 
 android {
-    namespace 'com.burakkuyucu.reachard'
+    namespace "com.burakkuyucu.reachard"
     compileSdk 33
 
     defaultConfig {
@@ -36,7 +37,7 @@ android {
         consumerProguardFiles("consumer-proguard-rules.pro")
     }
 
-    buildTypes.all {
+    buildTypes.configureEach {
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -56,7 +57,7 @@ android {
         }
     }
 
-    resourcePrefix "reachard_"
+    resourcePrefix "reachard_di_"
 }
 
 dependencies {
@@ -68,8 +69,8 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                groupId = 'com.kuyucuburak'
-                artifactId = 'Reacher'
+                groupId = "com.kuyucuburak"
+                artifactId = "reachard-di"
 
                 afterEvaluate {
                     from components.release
