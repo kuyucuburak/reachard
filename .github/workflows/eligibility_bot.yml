@@ -30,7 +30,7 @@ jobs:
       - name: Build
         run: ./gradlew build
 
-      - name: Run linting
+      - name: Analyze code
         run: ./gradlew check
 
       - name: Run tests for reachard-di
