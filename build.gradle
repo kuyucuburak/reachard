@@ -16,21 +16,22 @@ buildscript {
 
         versions = [
                 // SDK and tools
-                gradle                        : '7.3.1',
-                kotlin                        : '1.7.0',
+                gradle                        : "7.3.1",
+                kotlin                        : "1.8.10",
 
                 // App dependencies
-                composeBOM                    : '2023.01.00',
-                composeKotlinCompilerExtension: '1.3.2',
-                junit                         : '4.13.2',
-                ktx                           : '1.9.0',
-                lifecycle                     : '2.5.1',
+                activityCompose               : "1.7.2",
+                composeBOM                    : "2023.06.01",
+                composeKotlinCompilerExtension: "1.3.2",
+                junit                         : "4.13.2",
+                ktx                           : "1.10.1",
+                lifecycle                     : "2.6.1",
         ]
     }
 }
 
 plugins {
-    id 'com.android.application' version '7.4.0' apply false
-    id 'com.android.library' version '7.4.0' apply false
-    id 'org.jetbrains.kotlin.android' version '1.7.0' apply false
+    id "com.android.application" version "7.4.0" apply false
+    id "com.android.library" version "7.4.0" apply false
+    id "org.jetbrains.kotlin.android" version "1.7.0" apply false
 }
