@@ -70,7 +70,7 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 groupId = "com.kuyucuburak"
-                artifactId = "Reacher"
+                artifactId = "reachard-di"
 
                 afterEvaluate {
                     from components.release

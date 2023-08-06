@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="reachard_sample_theme" parent="android:Theme.Material.Light.DarkActionBar" />
+    <style name="reachard_sample_theme" parent="android:Theme.Material.Light.DarkActionBar" >
+        <item name="android:colorPrimaryDark">@color/reachard_sample_teal_700</item>
+        <item name="android:colorPrimary">@color/reachard_sample_teal_700</item>
+    </style>
 </resources>
