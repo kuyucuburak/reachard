@@ -48,9 +48,9 @@ dependencies {
     implementation project(":reachard-di")
 
     // AndroidX
+    implementation "androidx.activity:activity-compose:${versions.activityCompose}"
     implementation "androidx.core:core-ktx:${versions.ktx}"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}"
-    implementation "androidx.activity:activity-compose:${versions.activityCompose}"
 
     // Jetpack Compose
     implementation platform("androidx.compose:compose-bom:${versions.bomCompose}")
