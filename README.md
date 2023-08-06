@@ -1,3 +1,4 @@
+[![Eligibility Bot](https://github.com/kuyucuburak/Reachard/actions/workflows/eligibility_bot.yml/badge.svg)](https://github.com/kuyucuburak/Reachard/actions/workflows/eligibility_bot.yml)
 [![](https://jitpack.io/v/kuyucuburak/Reachard.svg)](https://jitpack.io/#kuyucuburak/Reachard)
 
 # Reachard - Dependency Injection
