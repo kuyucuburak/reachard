@@ -16,5 +16,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Reachard"
 
-include ':reachard-di'
-include ':sample-kotlin'
+include ":reachard-di"
+include ":sample-kotlin"

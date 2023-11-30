@@ -1,20 +1,20 @@
 package com.burakkuyucu.reachard.di
 
-import com.burakkuyucu.reachard.di.data.InstanceFactoryHolder
-import com.burakkuyucu.reachard.di.data.InstanceHolder
-import com.burakkuyucu.reachard.di.enum.PutConflictStrategy
+import com.burakkuyucu.reachard.di.data.InstanceFactoryHolderData
+import com.burakkuyucu.reachard.di.data.InstanceHolderData
+import com.burakkuyucu.reachard.di.enums.PutConflictStrategyEnums
 import com.burakkuyucu.reachard.di.exception.NoReachardInstanceFoundException
-import com.burakkuyucu.reachard.di.exception.ReachardInstanceAlreadyExistException
+import com.burakkuyucu.reachard.di.exception.ReachardInstanceAlreadyExistsException
 import com.burakkuyucu.reachard.di.util.InstanceFactory
 import java.util.concurrent.CopyOnWriteArrayList
 
-object Reachard {
+object ReachardDI {
 
-    private val DEFAULT_PUT_CONFLICT_STRATEGY = PutConflictStrategy.CRASH
-    private val DEFAULT_LAZY_PUT_CONFLICT_STRATEGY = PutConflictStrategy.UPDATE
+    private val DEFAULT_PUT_CONFLICT_STRATEGY = PutConflictStrategyEnums.CRASH
+    private val DEFAULT_LAZY_PUT_CONFLICT_STRATEGY = PutConflictStrategyEnums.UPDATE
 
-    @PublishedApi internal val instanceHolderList: MutableList<InstanceHolder<out Any>> = CopyOnWriteArrayList()
-    @PublishedApi internal val instanceFactoryHolderList: MutableList<InstanceFactoryHolder<out Any>> = CopyOnWriteArrayList()
+    @PublishedApi internal val instanceHolderList: MutableList<InstanceHolderData<out Any>> = CopyOnWriteArrayList()
+    @PublishedApi internal val instanceFactoryHolderList: MutableList<InstanceFactoryHolderData<out Any>> = CopyOnWriteArrayList()
 
     @PublishedApi internal var defaultPutConflictStrategy = DEFAULT_PUT_CONFLICT_STRATEGY
     @PublishedApi internal var defaultLazyPutConflictStrategy = DEFAULT_LAZY_PUT_CONFLICT_STRATEGY
@@ -26,27 +26,27 @@ object Reachard {
         get() = instanceFactoryHolderList.size
 
     fun setDefaultValues(
-        defaultPutConflictStrategy: PutConflictStrategy,
-        defaultLazyPutConflictStrategy: PutConflictStrategy,
+        defaultPutConflictStrategy: PutConflictStrategyEnums,
+        defaultLazyPutConflictStrategy: PutConflictStrategyEnums,
     ) {
-        Reachard.defaultPutConflictStrategy = defaultPutConflictStrategy
-        Reachard.defaultLazyPutConflictStrategy = defaultLazyPutConflictStrategy
+        ReachardDI.defaultPutConflictStrategy = defaultPutConflictStrategy
+        ReachardDI.defaultLazyPutConflictStrategy = defaultLazyPutConflictStrategy
     }
 
     inline fun <reified T : Any> put(
         instance: T,
         key: String? = null,
-        putConflictStrategy: PutConflictStrategy = defaultPutConflictStrategy,
+        putConflictStrategy: PutConflictStrategyEnums = defaultPutConflictStrategy,
     ) {
         val instanceHolder = getInstanceHolder<T>(key)
         if (instanceHolder != null) {
             when (putConflictStrategy) {
-                PutConflictStrategy.CRASH -> throw ReachardInstanceAlreadyExistException()
-                PutConflictStrategy.SKIP -> return
-                PutConflictStrategy.UPDATE -> {
+                PutConflictStrategyEnums.CRASH -> throw ReachardInstanceAlreadyExistsException()
+                PutConflictStrategyEnums.SKIP -> return
+                PutConflictStrategyEnums.UPDATE -> {
                     instanceHolderList.remove(instanceHolder)
 
-                    val newInstanceHolder = InstanceHolder(key, instance)
+                    val newInstanceHolder = InstanceHolderData(key, instance)
                     instanceHolderList.add(newInstanceHolder)
                 }
             }
@@ -57,12 +57,12 @@ object Reachard {
         val instanceFactoryHolder = getInstanceFactoryHolder<T>(key)
         if (instanceFactoryHolder != null) {
             when (putConflictStrategy) {
-                PutConflictStrategy.CRASH -> throw ReachardInstanceAlreadyExistException()
-                PutConflictStrategy.SKIP -> return
-                PutConflictStrategy.UPDATE -> {
+                PutConflictStrategyEnums.CRASH -> throw ReachardInstanceAlreadyExistsException()
+                PutConflictStrategyEnums.SKIP -> return
+                PutConflictStrategyEnums.UPDATE -> {
                     instanceFactoryHolderList.remove(instanceFactoryHolder)
 
-                    val newInstanceHolder = InstanceHolder(key, instance)
+                    val newInstanceHolder = InstanceHolderData(key, instance)
                     instanceHolderList.add(newInstanceHolder)
                 }
             }
@@ -70,24 +70,24 @@ object Reachard {
             return
         }
 
-        val newInstanceHolder = InstanceHolder(key, instance)
+        val newInstanceHolder = InstanceHolderData(key, instance)
         instanceHolderList.add(newInstanceHolder)
     }
 
     inline fun <reified T : Any> lazyPut(
         noinline instanceFactory: InstanceFactory<T>,
         key: String? = null,
-        putConflictStrategy: PutConflictStrategy = defaultLazyPutConflictStrategy,
+        putConflictStrategy: PutConflictStrategyEnums = defaultLazyPutConflictStrategy,
     ) {
         val instanceHolder = getInstanceHolder<T>(key)
         if (instanceHolder != null) {
             when (putConflictStrategy) {
-                PutConflictStrategy.CRASH -> throw ReachardInstanceAlreadyExistException()
-                PutConflictStrategy.SKIP -> return
-                PutConflictStrategy.UPDATE -> {
+                PutConflictStrategyEnums.CRASH -> throw ReachardInstanceAlreadyExistsException()
+                PutConflictStrategyEnums.SKIP -> return
+                PutConflictStrategyEnums.UPDATE -> {
                     instanceHolderList.remove(instanceHolder)
 
-                    val newInstanceFactoryHolder = InstanceFactoryHolder(key, instanceFactory)
+                    val newInstanceFactoryHolder = InstanceFactoryHolderData(key, instanceFactory)
                     instanceFactoryHolderList.add(newInstanceFactoryHolder)
                 }
             }
@@ -98,12 +98,12 @@ object Reachard {
         val instanceFactoryHolder = getInstanceFactoryHolder<T>(key)
         if (instanceFactoryHolder != null) {
             when (putConflictStrategy) {
-                PutConflictStrategy.CRASH -> throw ReachardInstanceAlreadyExistException()
-                PutConflictStrategy.SKIP -> return
-                PutConflictStrategy.UPDATE -> {
+                PutConflictStrategyEnums.CRASH -> throw ReachardInstanceAlreadyExistsException()
+                PutConflictStrategyEnums.SKIP -> return
+                PutConflictStrategyEnums.UPDATE -> {
                     instanceFactoryHolderList.remove(instanceFactoryHolder)
 
-                    val newInstanceFactoryHolder = InstanceFactoryHolder(key, instanceFactory)
+                    val newInstanceFactoryHolder = InstanceFactoryHolderData(key, instanceFactory)
                     instanceFactoryHolderList.add(newInstanceFactoryHolder)
                 }
             }
@@ -111,7 +111,7 @@ object Reachard {
             return
         }
 
-        val newInstanceFactoryHolder = InstanceFactoryHolder(key, instanceFactory)
+        val newInstanceFactoryHolder = InstanceFactoryHolderData(key, instanceFactory)
         instanceFactoryHolderList.add(newInstanceFactoryHolder)
     }
 
@@ -139,7 +139,7 @@ object Reachard {
 
         val instanceFactory = getInstanceFactoryHolder<T>(key)
         if (instanceFactory != null) {
-            val newInstanceHolder = InstanceHolder(key, instanceFactory.instanceFactory())
+            val newInstanceHolder = InstanceHolderData(key, instanceFactory.instanceFactory())
             instanceFactoryHolderList.remove(instanceFactory)
             instanceHolderList.add(newInstanceHolder)
             return newInstanceHolder.instance
@@ -161,16 +161,16 @@ object Reachard {
     }
 
     @PublishedApi
-    internal inline fun <reified T : Any> getInstanceHolder(key: String?): InstanceHolder<T>? {
+    internal inline fun <reified T : Any> getInstanceHolder(key: String?): InstanceHolderData<T>? {
         return instanceHolderList
-            .filterIsInstance<InstanceHolder<T>>()
+            .filterIsInstance<InstanceHolderData<T>>()
             .firstOrNull { it.key == key }
     }
 
     @PublishedApi
-    internal inline fun <reified T : Any> getInstanceFactoryHolder(key: String?): InstanceFactoryHolder<T>? {
+    internal inline fun <reified T : Any> getInstanceFactoryHolder(key: String?): InstanceFactoryHolderData<T>? {
         return instanceFactoryHolderList
-            .filterIsInstance<InstanceFactoryHolder<T>>()
+            .filterIsInstance<InstanceFactoryHolderData<T>>()
             .firstOrNull { it.key == key }
     }
 }

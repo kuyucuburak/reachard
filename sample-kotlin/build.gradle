@@ -5,17 +5,9 @@ plugins {
 
 android {
     namespace "com.burakkuyucu.reachard.sample"
-    compileSdk 33
+    resourcePrefix "reachard_sample_"
 
-    defaultConfig {
-        applicationId "com.burakkuyucu.reachard.sample"
-
-        minSdk rootProject.minSdk
-        targetSdk rootProject.targetSdk
-
-        versionCode rootProject.versionCode
-        versionName rootProject.versionName
-    }
+    compileSdk rootProject.compileSdkVersion
 
     buildFeatures {
         compose true
@@ -34,14 +26,22 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion versions.kotlinCompilerExtension
+        kotlinCompilerExtensionVersion versions.composeKotlinCompilerExtension
+    }
+
+    defaultConfig {
+        applicationId "com.burakkuyucu.reachard.sample"
+
+        minSdk rootProject.minSdkSampleVersion
+        targetSdk rootProject.targetSdkVersion
+
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
     }
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11
     }
-
-    resourcePrefix "reachard_sample_"
 }
 
 dependencies {
@@ -49,7 +49,7 @@ dependencies {
 
     // AndroidX
     implementation "androidx.activity:activity-compose:${versions.activityCompose}"
-    implementation "androidx.core:core-ktx:${versions.ktx}"
+    implementation "androidx.core:core-ktx:${versions.core}"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}"
 
     // Jetpack Compose
@@ -58,11 +58,4 @@ dependencies {
     implementation "androidx.compose.runtime:runtime-livedata"
     implementation "androidx.compose.ui:ui"
     implementation "androidx.compose.ui:ui-tooling"
-}
-
-configurations.configureEach {
-    resolutionStrategy {
-        force "org.jetbrains.kotlin:kotlin-stdlib:1.8.10"
-        force "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10"
-    }
 }

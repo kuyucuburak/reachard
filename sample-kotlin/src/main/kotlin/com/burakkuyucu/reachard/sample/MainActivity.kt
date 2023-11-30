@@ -14,15 +14,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.burakkuyucu.reachard.di.Reachard
+import com.burakkuyucu.reachard.di.ReachardDI
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val counterViewModel = CounterViewModel()
-        Reachard.put(counterViewModel)
+        val mainViewModel = MainViewModel()
+        ReachardDI.put(mainViewModel)
 
         setContent {
             MainUI()
@@ -45,7 +45,7 @@ fun MainUI() {
 
 @Composable
 fun CounterShower() {
-    val value by Reachard.get<CounterViewModel>().counter.observeAsState()
+    val value by ReachardDI.get<MainViewModel>().counter.observeAsState()
 
     Text(
         text = value.toString(),
@@ -58,7 +58,7 @@ fun CounterShower() {
 fun CounterIncreaser() {
     Button(
         onClick = {
-            Reachard.get<CounterViewModel>().increaseCount()
+            ReachardDI.get<MainViewModel>().increaseCount()
         },
     ) {
         Text(text = "Increase count")

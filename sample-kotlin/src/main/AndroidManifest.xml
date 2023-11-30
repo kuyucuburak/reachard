@@ -7,12 +7,12 @@
         android:label="@string/reachard_sample_app_name"
         android:roundIcon="@mipmap/reachard_sample_ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/reachard_sample_theme">
+        android:theme="@style/reachard_sample_app_theme">
 
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/reachard_sample_theme">
+            android:theme="@style/reachard_sample_app_theme">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
