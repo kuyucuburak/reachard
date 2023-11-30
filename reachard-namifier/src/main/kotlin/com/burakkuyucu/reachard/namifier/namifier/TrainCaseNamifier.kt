@@ -2,7 +2,7 @@ package com.burakkuyucu.reachard.namifier.namifier
 
 import com.burakkuyucu.reachard.namifier.namifier.base.NamifierBase
 
-object TrainCaseNamifier : NamifierBase() {
+internal object TrainCaseNamifier : NamifierBase() {
 
     override val replacingSeparator: String = "-"
 

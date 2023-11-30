@@ -2,7 +2,7 @@ package com.burakkuyucu.reachard.namifier.namifier
 
 import com.burakkuyucu.reachard.namifier.namifier.base.NamifierBase
 
-object SnakeCaseNamifier : NamifierBase() {
+internal object SnakeCaseNamifier : NamifierBase() {
 
     override val replacingSeparator: String = "_"
 
