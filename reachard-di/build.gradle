@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace "com.burakkuyucu.reachard"
+    namespace "com.burakkuyucu.reachard.di"
     resourcePrefix "reachard_di_"
 
     compileSdk rootProject.compileSdkVersion
