@@ -5,80 +5,11 @@ plugins {
 }
 
 android {
-    namespace "com.burakkuyucu.reachard.di"
+    namespace "com.kuyucuburak.reachard.di"
     resourcePrefix "reachard_di_"
-
-    compileSdk rootProject.compileSdkVersion
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-    }
-
-    defaultConfig {
-        minSdk rootProject.minSdkLibraryVersion
-        targetSdk rootProject.targetSdkVersion
-
-        consumerProguardFiles("consumer-proguard-rules.pro")
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
-    }
-
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-            withJavadocJar()
-        }
-    }
-
-    buildTypes.configureEach {
-        consumerProguardFiles "consumer-rules.pro"
-    }
 }
 
 dependencies {
     // Unit Test
     testImplementation "junit:junit:${versions.junit}"
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                groupId = "com.kuyucuburak"
-                artifactId = "reachard-di"
-
-                afterEvaluate {
-                    from components.release
-                }
-            }
-        }
-    }
-}
-
-tasks.register("androidJavadocs", Javadoc) {
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    exclude "**/R.html", "**/R.*.html", "**/index.html"
-    source = android.sourceSets.main.kotlin.srcDirs
-
-    android.libraryVariants.configureEach { variant ->
-        if (variant.name == "release") {
-            owner.classpath += variant.javaCompileProvider.get().classpath
-        }
-    }
-}
-
-tasks.register("androidJavadocsJar", Jar) {
-    dependsOn androidJavadocs
-    from androidJavadocs.destinationDir
-
-    archiveClassifier.set("javadoc")
-}
-
-tasks.register("androidSourcesJar", Jar) {
-    from android.sourceSets.main.kotlin.srcDirs
-
-    archiveClassifier.set("sources")
 }

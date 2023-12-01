@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace "com.burakkuyucu.reachard.sample"
+    namespace "com.kuyucuburak.reachard.sample"
     resourcePrefix "reachard_sample_"
 
     compileSdk rootProject.compileSdkVersion
@@ -30,7 +30,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.burakkuyucu.reachard.sample"
+        applicationId "com.kuyucuburak.reachard.sample"
 
         minSdk rootProject.minSdkSampleVersion
         targetSdk rootProject.targetSdkVersion
