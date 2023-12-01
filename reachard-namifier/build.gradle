@@ -5,8 +5,8 @@ plugins {
 }
 
 android {
-    namespace "com.burakkuyucu.reachard.di"
-    resourcePrefix "reachard_di_"
+    namespace "com.burakkuyucu.reachard.namifier"
+    resourcePrefix "reachard_namifier_"
 
     compileSdk rootProject.compileSdkVersion
 
@@ -48,7 +48,7 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 groupId = "com.kuyucuburak"
-                artifactId = "reachard-di"
+                artifactId = "reachard-namifier"
 
                 afterEvaluate {
                     from components.release
