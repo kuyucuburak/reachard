@@ -12,4 +12,13 @@ object ReachardNamifier {
     fun convert(namifier: NamifierBase, text: String, separator: String): String {
         return namifier.convert(text = text, separator = separator)
     }
+
+    fun convert(from: CaseTypeEnums, to: CaseTypeEnums, text: String): String {
+        val newText = from.namifier.split(text)
+        return to.namifier.convert(newText)
+    }
+
+    fun split(namifier: NamifierBase, text: String): List<String> {
+        return namifier.split(text)
+    }
 }

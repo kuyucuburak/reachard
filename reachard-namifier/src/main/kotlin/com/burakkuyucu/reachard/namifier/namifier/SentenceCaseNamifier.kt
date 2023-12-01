@@ -8,7 +8,12 @@ internal object SentenceCaseNamifier : NamifierBase() {
 
     override fun convertWord(totalWordCount: Int, wordIndex: Int, word: String): String {
         return when (wordIndex) {
-            0 -> word.lowercase().replaceFirstChar { it.uppercase() }
+            0 -> {
+                word
+                    .lowercase()
+                    .replaceFirstChar { it.uppercase() }
+            }
+
             else -> word.lowercase()
         }
     }
