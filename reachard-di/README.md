@@ -7,10 +7,8 @@
 
 ## Attribution
 
-I inspired from a Flutter library called [Getx](https://github.com/jonataslaw/getx). It contains a
-lot of utilization. One of them is for a dependency injection management. It is very easy to manage
-your objects! I couldn't see a library in Android
-world similar to it and wanted to develop a similar library.
+I inspired from a Flutter library called [Getx](https://github.com/jonataslaw/getx). It contains a lot of utilization. One of them is for a dependency injection management. It is very easy to manage
+your objects! I couldn't see a library in Android world similar to it and wanted to develop a similar library.
 
 ## Table of Contents
 
@@ -58,6 +56,7 @@ dependencies {
 **Step 1:** Add below code to your repositories:
 
 ```xml
+
 <repositories>
     <repository>
         <id>jitpack.io</id>
@@ -224,14 +223,10 @@ It clears variables you put normally or lazily, it also converts default values 
 
 ## Pros vs Cons
 
-So there are a lot of dependency injection (DI) libraries like dagger. Why should you use Reachard
-instead of it? It really depends on the project you work on. Let me mention about advantage and
+So there are a lot of dependency injection (DI) libraries like dagger. Why should you use Reachard instead of it? It really depends on the project you work on. Let me mention about advantage and
 disadvantage of Reachard:
 
-**Advantage:** DI libraries, especially like Dagger, sometimes can be difficult to build in your
-project. But Reachard doesn't need any code to build. No factory creations, no annotations, no
-annotation processors etc. You just use `Reachard`
+**Advantage:** DI libraries, especially like Dagger, sometimes can be difficult to build in your annotation processors etc. You just use `Reachard`
 instance to manage your objects.
 
-**Disadvantage:** You don't have a way to tell how to create your instances to Reachard unlike
-dagger. You have to actually create all of your objects by yourself and put it into the Reachard.
+**Disadvantage:** You don't have a way to tell how to create your instances to Reachard unlike dagger. You have to actually create all of your objects by yourself and put it into the Reachard.

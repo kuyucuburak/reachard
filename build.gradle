@@ -43,10 +43,6 @@ subprojects { project ->
             project.android {
                 compileSdk project.rootProject.compileSdkVersion
 
-                buildTypes.configureEach {
-                    consumerProguardFiles "consumer-rules.pro"
-                }
-
                 compileOptions {
                     sourceCompatibility JavaVersion.VERSION_17
                     targetCompatibility JavaVersion.VERSION_17
@@ -55,12 +51,22 @@ subprojects { project ->
                 defaultConfig {
                     minSdk rootProject.minSdkVersion
                     targetSdk rootProject.targetSdkVersion
-
-                    consumerProguardFiles("consumer-proguard-rules.pro")
                 }
 
                 kotlinOptions {
                     jvmTarget = JavaVersion.VERSION_17
+                }
+            }
+        }
+
+        if (project.plugins.hasPlugin("com.android.library")) {
+            project.android {
+                buildTypes.configureEach {
+                    consumerProguardFiles "consumer-rules.pro"
+                }
+
+                defaultConfig {
+                    consumerProguardFiles("consumer-proguard-rules.pro")
                 }
 
                 publishing {
@@ -70,9 +76,7 @@ subprojects { project ->
                     }
                 }
             }
-        }
 
-        if (project.plugins.hasPlugin("com.android.library")) {
             project.publishing {
                 publications {
                     maven(MavenPublication) {
