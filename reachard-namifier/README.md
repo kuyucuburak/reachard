@@ -43,7 +43,7 @@
 
 ```gradle
     dependencies {
-	    implementation "com.github.kuyucuburak.Reachard:reachard-namifier:$reachardVersion"
+	    implementation "com.github.kuyucuburak.reachard:reachard-namifier:$reachardVersion"
 	}
 ```
 
@@ -64,7 +64,7 @@
 
 ```xml
 <dependency>
-    <groupId>com.github.kuyucuburak.Reachard</groupId>
+    <groupId>com.github.kuyucuburak.reachard</groupId>
     <artifactId>reachard-namifier</artifactId>
     <version>reachardVersion</version>
 </dependency>

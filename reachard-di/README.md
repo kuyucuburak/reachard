@@ -49,7 +49,7 @@ allprojects {
 
 ```gradle
 dependencies {
-    implementation "com.github.kuyucuburak.Reachard:reachard-di:$reachardVersion"
+    implementation "com.github.kuyucuburak.reachard:reachard-di:$reachardVersion"
 }
 ```
 
@@ -71,7 +71,7 @@ dependencies {
 ```xml
 
 <dependency>
-    <groupId>com.github.kuyucuburak.Reachard</groupId>
+    <groupId>com.github.kuyucuburak.reachard</groupId>
     <artifactId>reachard-di</artifactId>
     <version>reachardVersion</version>
 </dependency>

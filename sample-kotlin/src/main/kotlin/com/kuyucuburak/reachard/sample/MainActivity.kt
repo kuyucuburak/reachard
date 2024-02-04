@@ -15,6 +15,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kuyucuburak.reachard.di.ReachardDI
+import com.kuyucuburak.reachard.namifier.ReachardNamifier
+import com.kuyucuburak.reachard.namifier.enums.CaseTypeEnums.SENTENCE
+import com.kuyucuburak.reachard.namifier.enums.CaseTypeEnums.TITLE
 
 class MainActivity : ComponentActivity() {
 
@@ -56,11 +59,13 @@ fun CounterShower() {
 
 @Composable
 fun CounterIncreaser() {
+    val text = ReachardNamifier.convert(SENTENCE, TITLE, "increase count")
+
     Button(
         onClick = {
             ReachardDI.get<MainViewModel>().increaseCount()
         },
     ) {
-        Text(text = "Increase count")
+        Text(text = text)
     }
 }

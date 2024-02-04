@@ -30,7 +30,9 @@ android {
 }
 
 dependencies {
-    implementation project(":reachard-di")
+    // Reachard
+    implementation "com.github.kuyucuburak.reachard:reachard-di:${versions.reachard}"
+    implementation "com.github.kuyucuburak.reachard:reachard-namifier:${versions.reachard}"
 
     // AndroidX
     implementation "androidx.activity:activity-compose:${versions.activityCompose}"
