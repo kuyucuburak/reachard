@@ -3,6 +3,7 @@ pluginManagement {
         google()
         gradlePluginPortal()
         mavenCentral()
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -19,4 +20,4 @@ rootProject.name = "Reachard"
 
 include ":reachard-di",
         ":reachard-namifier",
-        ":sample-kotlin"
+        ":sample"
