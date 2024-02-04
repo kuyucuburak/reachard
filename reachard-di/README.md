@@ -7,27 +7,29 @@
 
 ## Attribution
 
-I inspired from a Flutter library called [Getx](https://github.com/jonataslaw/getx). It contains a lot of utilitization. One of them is for a dependency injection management. It is very easy to manage your objects! I couldn't see a library in Android
+I inspired from a Flutter library called [Getx](https://github.com/jonataslaw/getx). It contains a
+lot of utilization. One of them is for a dependency injection management. It is very easy to manage
+your objects! I couldn't see a library in Android
 world similar to it and wanted to develop a similar library.
 
 ## Table of Contents
 
 1. [Integration](#integration)
     1. [Gradle Setup](#gradle-setup)
-    1. [Maven Setup](#maven-setup)
-1. [Documentation](#documentation)
+    2. [Maven Setup](#maven-setup)
+2. [Documentation](#documentation)
     1. [Put](#put)
-    1. [Lazy Put](#lazy-put)
-    1. [Put Conflict Strategy](#put-conflict-strategy)
+    2. [Lazy Put](#lazy-put)
+    3. [Put Conflict Strategy](#put-conflict-strategy)
         1. [CRASH](#crash)
-        1. [SKIP](#skip)
-        1. [UPDATE](#update)
-        1. [Default Put Strategies](#default-put-strategies)
-    1. [Get](#get)
-    1. [Remove](#remove)
-    1. [Contains](#contains)
-    1. [Reset](#reset)
-1. [Pros vs Cons](#pros-vs-cons)
+        2. [SKIP](#skip)
+        3. [UPDATE](#update)
+        4. [Default Put Strategies](#default-put-strategies)
+    4. [Get](#get)
+    5. [Remove](#remove)
+    6. [Contains](#contains)
+    7. [Reset](#reset)
+3. [Pros vs Cons](#pros-vs-cons)
 
 ## Integration
 
@@ -101,7 +103,7 @@ ReachardDI.put(TimeUtils())
 Putting all of your objects at the same time can cause performance issues. Or an object can have expensive constructor. `LazyPut` is here to help!
 
 ```kotlin
-ReachardDI.lazyPut({ TimeUtils() })
+ReachardDI.lazyPut { TimeUtils() }
 ```
 
 The `TimeUtils` object will be created when you reach the it. Until that time, it won't be created. That is how lazy work.
@@ -111,7 +113,7 @@ The `TimeUtils` object will be created when you reach the it. Until that time, i
 Reachard throws an exception if you put the same instance again with the same key. But using different keys, you put instances of the same class as many as you want:
 
 ```kotlin
-ReachardDI.put({ TimeUtils() })
+ReachardDI.put { TimeUtils() }
 ReachardDI.put({ TimeUtils() }, key = "myKey")
 ReachardDI.lazyPut({ TimeUtils() }, key = "myLazyInstanceKey")
 ```
@@ -198,7 +200,7 @@ ReachardDI.remove<TimeUtils>(key = "myKey")
 
 ### Contains
 
-You can check an object existance as below:
+You can check an object existence as below:
 
 ```kotlin
 ReachardDI.contains<TimeUtils>()
@@ -222,9 +224,14 @@ It clears variables you put normally or lazily, it also converts default values 
 
 ## Pros vs Cons
 
-So there are a lot of dependency injection (DI) libraries like dagger. Why should you use Reachard instead of it? It really depends on the project you work on. Let me mention about advantage and disadvantage of Reachard:
+So there are a lot of dependency injection (DI) libraries like dagger. Why should you use Reachard
+instead of it? It really depends on the project you work on. Let me mention about advantage and
+disadvantage of Reachard:
 
-**Adtantage:** DI libraries, especially like Dagger, sometimes can be difficult to build in your project. But Reachard doesn't need any code to build. No factory creations, no annotations, no annotation processors etc. You just use `Reachard`
+**Advantage:** DI libraries, especially like Dagger, sometimes can be difficult to build in your
+project. But Reachard doesn't need any code to build. No factory creations, no annotations, no
+annotation processors etc. You just use `Reachard`
 instance to manage your objects.
 
-**Disadvantage:** You don't have a way to tell how to create your instances to Reachard unlike dagger. You have to actually create all of your objects by yourself and put it into the Reachard.
+**Disadvantage:** You don't have a way to tell how to create your instances to Reachard unlike
+dagger. You have to actually create all of your objects by yourself and put it into the Reachard.
