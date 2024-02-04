@@ -10,49 +10,56 @@ buildscript {
         versionCode = versionMajor * 10000000 + versionMinor * 100000 + versionPatch * 1000 + versionBuild
         versionName = "$versionMajor.$versionMinor.$versionPatch"
 
-        compileSdkVersion = 33
-        minSdkLibraryVersion = 1
-        minSdkSampleVersion = 21
-        targetSdkVersion = 33
+        minSdkVersion = 21
+        targetSdkVersion = 34
+        compileSdkVersion = 34
 
         versions = [
-                // App dependencies
-                activityCompose               : "1.7.2",
-                bomCompose                    : "2023.06.01",
-                composeKotlinCompilerExtension: "1.4.4",
-                core                          : "1.10.1",
+                // Platform
+                compose                       : "2023.06.01",
+
+                // AndroidX
+                activityCompose               : "1.8.2",
+                core                          : "1.12.0",
+                lifecycle                     : "2.7.0",
+
+                // Other
+                composeKotlinCompilerExtension: "1.5.5",
                 junit                         : "4.13.2",
-                lifecycle                     : "2.6.2",
         ]
     }
 }
 
 plugins {
-    id "com.android.application" version "8.1.0" apply false
-    id "com.android.library" version "8.1.0" apply false
-    id "org.jetbrains.kotlin.android" version "1.8.10" apply false
+    id "com.android.application" version "8.2.2" apply false
+    id "com.android.library" version "8.2.2" apply false
+    id "org.jetbrains.kotlin.android" version "1.9.20" apply false
 }
 
 subprojects { project ->
     afterEvaluate {
-        if (project.plugins.hasPlugin("com.android.library")) {
+        if (project.plugins.hasPlugin("com.android.library") || project.plugins.hasPlugin("com.android.application")) {
             project.android {
                 compileSdk project.rootProject.compileSdkVersion
 
+                buildTypes.configureEach {
+                    consumerProguardFiles "consumer-rules.pro"
+                }
+
                 compileOptions {
-                    sourceCompatibility JavaVersion.VERSION_11
-                    targetCompatibility JavaVersion.VERSION_11
+                    sourceCompatibility JavaVersion.VERSION_17
+                    targetCompatibility JavaVersion.VERSION_17
                 }
 
                 defaultConfig {
-                    minSdk rootProject.minSdkLibraryVersion
+                    minSdk rootProject.minSdkVersion
                     targetSdk rootProject.targetSdkVersion
 
                     consumerProguardFiles("consumer-proguard-rules.pro")
                 }
 
                 kotlinOptions {
-                    jvmTarget = JavaVersion.VERSION_11
+                    jvmTarget = JavaVersion.VERSION_17
                 }
 
                 publishing {
@@ -61,12 +68,10 @@ subprojects { project ->
                         withJavadocJar()
                     }
                 }
-
-                buildTypes.configureEach {
-                    consumerProguardFiles "consumer-rules.pro"
-                }
             }
+        }
 
+        if (project.plugins.hasPlugin("com.android.library")) {
             project.publishing {
                 publications {
                     maven(MavenPublication) {

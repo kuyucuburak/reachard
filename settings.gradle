@@ -16,6 +16,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Reachard"
 
-include ":reachard-di"
-include ":reachard-namifier"
-include ":sample-kotlin"
+include ":reachard-di",
+        ":reachard-namifier",
+        ":sample-kotlin"
