@@ -16,7 +16,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Reachard"
+rootProject.name = "reachard"
 
 include ":reachard-di",
         ":reachard-namifier",
