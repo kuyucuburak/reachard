@@ -1,7 +1,7 @@
 [versions]
 
 # reachard
-reachard = '2.0.2'
+reachard = '2.1.1'
 
 # androidx
 androidx-activity-compose = '1.9.0'
