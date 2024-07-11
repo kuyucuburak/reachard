@@ -31,7 +31,7 @@ plugins {
 
 subprojects {
     afterEvaluate {
-        if (plugins.hasPlugin("com.android.library") || plugins.hasPlugin("com.android.application")) {
+        if (plugins.hasPlugin("com.android.application") || plugins.hasPlugin("com.android.library")) {
             extensions.configure<com.android.build.gradle.BaseExtension> {
                 compileSdkVersion(rootProject.extra["compileSdkVersion"] as Int)
 
