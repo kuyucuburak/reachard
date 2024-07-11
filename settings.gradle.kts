@@ -1,5 +1,11 @@
 @file:Suppress("UnstableApiUsage")
 
+rootProject.name = "reachard"
+
+include(":reachard-di")
+include(":reachard-namifier")
+include(":sample")
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -17,9 +23,3 @@ pluginManagement {
         maven(url = "https://jitpack.io")
     }
 }
-
-rootProject.name = "reachard"
-
-include(":reachard-di")
-include(":reachard-namifier")
-include(":sample")

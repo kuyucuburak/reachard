@@ -41,8 +41,8 @@ subprojects {
                 }
 
                 defaultConfig {
-                    minSdk = (rootProject.extra["minSdkVersion"] as Int)
-                    targetSdk = (rootProject.extra["targetSdkVersion"] as Int)
+                    minSdk = rootProject.extra["minSdkVersion"] as Int
+                    targetSdk = rootProject.extra["targetSdkVersion"] as Int
                 }
             }
         }
