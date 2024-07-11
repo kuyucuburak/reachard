@@ -4,19 +4,19 @@
 reachard = '2.0.2'
 
 # androidx
-androidx-activity-compose = '1.8.2'
-androidx-core-ktx = '1.12.0'
-androidx-lifecycle = '2.7.0'
+androidx-activity-compose = '1.9.0'
+androidx-core-ktx = '1.13.1'
+androidx-lifecycle = '2.8.3'
 
 # third party
 tp-junit = '4.13.2'
 
 # bom
-bom-compose = '2023.06.01'
+bom-compose = '2024.06.00'
 
 # plugin
-plugin-gradle = '8.2.2'
-plugin-kotlin = '1.9.20'
+plugin-gradle = '8.5.0'
+plugin-kotlin = '1.9.24'
 
 [libraries]
 
