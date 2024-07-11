@@ -15,26 +15,15 @@ buildscript {
         compileSdkVersion = 34
 
         versions = [
-                // Platform
-                compose                       : "2023.06.01",
-
-                // AndroidX
-                activityCompose               : "1.8.2",
-                core                          : "1.12.0",
-                lifecycle                     : "2.7.0",
-
-                // Other
                 composeKotlinCompilerExtension: "1.5.5",
-                junit                         : "4.13.2",
-                reachard                      : "2.0.2",
         ]
     }
 }
 
 plugins {
-    id "com.android.application" version "8.2.2" apply false
-    id "com.android.library" version "8.2.2" apply false
-    id "org.jetbrains.kotlin.android" version "1.9.20" apply false
+    alias libs.plugins.android.application apply false
+    alias libs.plugins.android.library apply false
+    alias libs.plugins.kotlin.android apply false
 }
 
 subprojects { project ->

@@ -1,7 +1,7 @@
 plugins {
-    id "com.android.library"
     id "maven-publish"
-    id "org.jetbrains.kotlin.android"
+    alias libs.plugins.android.library
+    alias libs.plugins.kotlin.android
 }
 
 android {
@@ -10,6 +10,6 @@ android {
 }
 
 dependencies {
-    // Unit Test
-    testImplementation "junit:junit:${versions.junit}"
+    // unit test
+    testImplementation libs.tp.junit
 }
