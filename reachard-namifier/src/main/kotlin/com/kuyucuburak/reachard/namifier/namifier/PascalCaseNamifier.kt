@@ -14,8 +14,8 @@ internal object PascalCaseNamifier : NamifierBase() {
 
     override fun split(word: String): List<String> {
         return Regex("([a-z])?([A-Z])")
-            .replace(word, "$1$temporarySeparator$2")
-            .split(temporarySeparator)
+            .replace(word, "$1$TEMPORARY_SEPARATOR$2")
+            .split(TEMPORARY_SEPARATOR)
             .filter { it.isNotEmpty() }
             .map { it.lowercase() }
     }

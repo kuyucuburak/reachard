@@ -44,7 +44,7 @@ abstract class NamifierBase {
 
     companion object {
 
-        const val temporarySeparator = "(&)"
+        const val TEMPORARY_SEPARATOR = "(&)"
 
     }
 }

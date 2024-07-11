@@ -50,10 +50,6 @@ subprojects {
         if (plugins.hasPlugin("com.android.library")) {
             extensions.configure<com.android.build.gradle.LibraryExtension> {
                 buildTypes.configureEach {
-                    consumerProguardFiles("consumer-rules.pro")
-                }
-
-                defaultConfig {
                     consumerProguardFiles("consumer-proguard-rules.pro")
                 }
 
