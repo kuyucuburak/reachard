@@ -64,7 +64,7 @@ subprojects {
             extensions.configure<PublishingExtension> {
                 publications {
                     create<MavenPublication>("maven") {
-                        artifactId = name
+                        artifactId = project.name
 
                         afterEvaluate {
                             from(components.getByName("release"))
