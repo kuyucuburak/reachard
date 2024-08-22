@@ -1,41 +1,41 @@
 [versions]
 
-# reachard
+# Reachard
 reachard = '2.1.2'
 
-# androidx
+# AndroidX
 androidx-activity-compose = '1.9.0'
 androidx-core-ktx = '1.13.1'
 androidx-lifecycle = '2.8.3'
 
-# third party
+# Third Party
 tp-junit = '4.13.2'
 
-# bom
+# BOM
 bom-compose = '2024.06.00'
 
-# plugin
+# Plugin
 plugin-gradle = '8.5.0'
 plugin-kotlin = '1.9.24'
 
 [libraries]
 
-# reachard
+# Reachard
 reachard-di = { group = "com.github.kuyucuburak.reachard", name = "reachard-di", version.ref = "reachard" }
 reachard-namifier = { group = "com.github.kuyucuburak.reachard", name = "reachard-namifier", version.ref = "reachard" }
 
-# androidx
+# AndroidX
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity-compose" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core-ktx" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
 
-# third party
+# Third Party
 tp-junit = { group = "junit", name = "junit", version.ref = "tp-junit" }
 
-# bom
+# BOM
 bom-compose = { group = "androidx.compose", name = "compose-bom", version.ref = "bom-compose" }
 
-# bom compose
+# BOM Compose
 bom-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 bom-compose-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata" }
 bom-compose-ui = { group = "androidx.compose.ui", name = "ui" }

@@ -32,16 +32,16 @@ android {
 }
 
 dependencies {
-    // reachard
+    // Reachard
     implementation(libs.reachard.di)
     implementation(libs.reachard.namifier)
 
-    // androidx
+    // AndroidX
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
-    // jetpack compose
+    // Jetpack Compose
     implementation(platform(libs.bom.compose))
     implementation(libs.bom.compose.material3)
     implementation(libs.bom.compose.runtime.livedata)

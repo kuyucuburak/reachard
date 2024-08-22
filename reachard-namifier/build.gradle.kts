@@ -10,6 +10,6 @@ android {
 }
 
 dependencies {
-    // unit test
+    // Unit Test
     testImplementation(libs.tp.junit)
 }
