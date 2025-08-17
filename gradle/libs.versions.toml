@@ -1,7 +1,7 @@
 [versions]
 
 # Reachard
-reachard = '2.1.2'
+reachard = '2.2.0'
 
 # AndroidX
 androidx-activity-compose = '1.10.1'
@@ -20,8 +20,8 @@ plugin-kotlin = '2.2.0'
 [libraries]
 
 # Reachard
-reachard-di = { group = "com.github.kuyucuburak.reachard", name = "reachard-di", version.ref = "reachard" }
-reachard-namifier = { group = "com.github.kuyucuburak.reachard", name = "reachard-namifier", version.ref = "reachard" }
+reachard-di = { group = "com.github.kuyucuburak.Reachard", name = "reachard-di", version.ref = "reachard" }
+reachard-namifier = { group = "com.github.kuyucuburak.Reachard", name = "reachard-namifier", version.ref = "reachard" }
 
 # AndroidX
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity-compose" }
