@@ -4,7 +4,9 @@ import com.kuyucuburak.reachard.di.enums.PutConflictStrategyEnums
 import com.kuyucuburak.reachard.di.exception.NoReachardInstanceFoundException
 import com.kuyucuburak.reachard.di.exception.ReachardInstanceAlreadyExistsException
 import org.junit.After
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotEquals
+import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 
@@ -68,7 +70,7 @@ class ReachardDITest {
         try {
             ReachardDI.put(fooTest, key = keyNormal1, putConflictStrategy = PutConflictStrategyEnums.CRASH)
             fail("This should fail!")
-        } catch (e: ReachardInstanceAlreadyExistsException) {
+        } catch (_: ReachardInstanceAlreadyExistsException) {
             // success
         }
     }
@@ -94,7 +96,7 @@ class ReachardDITest {
         try {
             ReachardDI.put(fooTest, key = keyForLazy, putConflictStrategy = PutConflictStrategyEnums.CRASH)
             fail("This should fail!")
-        } catch (e: ReachardInstanceAlreadyExistsException) {
+        } catch (_: ReachardInstanceAlreadyExistsException) {
             // success
         }
     }
@@ -123,7 +125,7 @@ class ReachardDITest {
         try {
             ReachardDI.lazyPut({ fooTest }, key = keyForLazy, putConflictStrategy = PutConflictStrategyEnums.CRASH)
             fail("This should fail!")
-        } catch (e: ReachardInstanceAlreadyExistsException) {
+        } catch (_: ReachardInstanceAlreadyExistsException) {
             // success
         }
     }
@@ -149,7 +151,7 @@ class ReachardDITest {
         try {
             ReachardDI.lazyPut({ fooTest }, key = keyNormal1, putConflictStrategy = PutConflictStrategyEnums.CRASH)
             fail("This should fail!")
-        } catch (e: ReachardInstanceAlreadyExistsException) {
+        } catch (_: ReachardInstanceAlreadyExistsException) {
             // success
         }
     }
@@ -212,7 +214,7 @@ class ReachardDITest {
         try {
             ReachardDI.get<Foo>(key = unknownKey)
             fail("This must fail!")
-        } catch (e: NoReachardInstanceFoundException) {
+        } catch (_: NoReachardInstanceFoundException) {
             // success
         }
     }

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -19,10 +20,6 @@ android {
         }
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = (rootProject.extra["versions"] as Map<*, *>)["composeKotlinCompilerExtension"] as String
-    }
-
     defaultConfig {
         applicationId = "com.kuyucuburak.reachard.sample"
 
@@ -38,7 +35,6 @@ dependencies {
 
     // AndroidX
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
     // Jetpack Compose

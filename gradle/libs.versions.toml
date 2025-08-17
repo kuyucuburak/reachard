@@ -4,19 +4,18 @@
 reachard = '2.1.2'
 
 # AndroidX
-androidx-activity-compose = '1.9.0'
-androidx-core-ktx = '1.13.1'
-androidx-lifecycle = '2.8.3'
+androidx-activity-compose = '1.10.1'
+androidx-lifecycle = '2.9.2'
 
 # Third Party
 tp-junit = '4.13.2'
 
 # BOM
-bom-compose = '2024.06.00'
+bom-compose = '2025.06.01'
 
 # Plugin
-plugin-gradle = '8.5.0'
-plugin-kotlin = '1.9.24'
+plugin-gradle = '8.11.0'
+plugin-kotlin = '2.2.0'
 
 [libraries]
 
@@ -26,7 +25,6 @@ reachard-namifier = { group = "com.github.kuyucuburak.reachard", name = "reachar
 
 # AndroidX
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity-compose" }
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core-ktx" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
 
 # Third Party
@@ -46,3 +44,4 @@ bom-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 android-application = { id = "com.android.application", version.ref = "plugin-gradle" }
 android-library = { id = "com.android.library", version.ref = "plugin-gradle" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "plugin-kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "plugin-kotlin" }

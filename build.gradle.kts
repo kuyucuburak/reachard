@@ -1,3 +1,6 @@
+import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.LibraryExtension
+
 buildscript {
     val buildNumber = System.getenv("BUILD_NUMBER")?.toInt() ?: 1
 
@@ -11,15 +14,8 @@ buildscript {
         set("versionName", "${extra["versionMajor"]}.${extra["versionMinor"]}.${extra["versionPatch"]}")
 
         set("minSdkVersion", 21)
-        set("targetSdkVersion", 34)
-        set("compileSdkVersion", 34)
-
-        set(
-            "versions",
-            mapOf(
-                "composeKotlinCompilerExtension" to "1.5.14"
-            )
-        )
+        set("targetSdkVersion", 35)
+        set("compileSdkVersion", 35)
     }
 }
 
@@ -27,12 +23,13 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.compose) apply false
 }
 
 subprojects {
     afterEvaluate {
         if (plugins.hasPlugin("com.android.application") || plugins.hasPlugin("com.android.library")) {
-            extensions.configure<com.android.build.gradle.BaseExtension> {
+            extensions.configure<BaseExtension> {
                 compileSdkVersion(rootProject.extra["compileSdkVersion"] as Int)
 
                 compileOptions {
@@ -48,7 +45,7 @@ subprojects {
         }
 
         if (plugins.hasPlugin("com.android.library")) {
-            extensions.configure<com.android.build.gradle.LibraryExtension> {
+            extensions.configure<LibraryExtension> {
                 buildTypes.configureEach {
                     consumerProguardFiles("consumer-proguard-rules.pro")
                 }
