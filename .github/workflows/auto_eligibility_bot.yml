@@ -1,0 +1,41 @@
+name: Auto - Eligibility Bot
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  inspection:
+    name: Eligibility Inspection
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Clear workspace
+        run: ./gradlew clean
+
+      - name: Build workspace
+        run: ./gradlew build
+
+      - name: Analyze code
+        run: ./gradlew check
+
+      - name: Run tests
+        run: |
+          ./gradlew :reachard-di:test
+          ./gradlew :reachard-namifier:test
