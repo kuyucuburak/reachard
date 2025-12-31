@@ -1,6 +1,6 @@
 package com.kuyucuburak.reachard.di.data
 
-import com.kuyucuburak.reachard.di.util.InstanceFactory
+import com.kuyucuburak.reachard.di.utils.InstanceFactory
 
 @PublishedApi
 internal data class InstanceFactoryHolderData<T : Any>(

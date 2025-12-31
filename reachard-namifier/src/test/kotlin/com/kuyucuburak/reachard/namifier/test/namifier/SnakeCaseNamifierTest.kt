@@ -1,5 +1,6 @@
-package com.kuyucuburak.reachard.namifier.namifier
+package com.kuyucuburak.reachard.namifier.test.namifier
 
+import com.kuyucuburak.reachard.namifier.namifier.SnakeCaseNamifier
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

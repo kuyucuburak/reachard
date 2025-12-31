@@ -74,6 +74,7 @@ class MainActivity : ComponentActivity() {
                         navigationIconContentColor = topBarContentColor,
                         titleContentColor = topBarContentColor,
                         actionIconContentColor = topBarContentColor,
+                        subtitleContentColor = topBarContentColor,
                     ),
                 )
             },

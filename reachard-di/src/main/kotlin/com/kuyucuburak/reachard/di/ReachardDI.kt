@@ -1,3 +1,5 @@
+@file:Suppress("FilterIsInstanceResultIsAlwaysEmpty")
+
 package com.kuyucuburak.reachard.di
 
 import com.kuyucuburak.reachard.di.data.InstanceFactoryHolderData
@@ -5,7 +7,7 @@ import com.kuyucuburak.reachard.di.data.InstanceHolderData
 import com.kuyucuburak.reachard.di.enums.PutConflictStrategyEnums
 import com.kuyucuburak.reachard.di.exception.NoReachardInstanceFoundException
 import com.kuyucuburak.reachard.di.exception.ReachardInstanceAlreadyExistsException
-import com.kuyucuburak.reachard.di.util.InstanceFactory
+import com.kuyucuburak.reachard.di.utils.InstanceFactory
 import java.util.concurrent.CopyOnWriteArrayList
 
 object ReachardDI {

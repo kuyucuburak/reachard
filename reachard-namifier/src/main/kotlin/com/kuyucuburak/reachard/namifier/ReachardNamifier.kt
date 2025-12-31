@@ -1,7 +1,7 @@
 package com.kuyucuburak.reachard.namifier
 
 import com.kuyucuburak.reachard.namifier.enums.CaseTypeEnums
-import com.kuyucuburak.reachard.namifier.namifier.base.NamifierBase
+import com.kuyucuburak.reachard.namifier.base.NamifierBase
 
 object ReachardNamifier {
 
