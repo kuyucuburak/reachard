@@ -17,7 +17,7 @@ androidx-activity-compose = '1.12.2'
 androidx-lifecycle = '2.10.0'
 
 # Third Party
-third-party-reachard = '2.2.0'
+third-party-reachard = '2.2.1'
 
 # Unit Test
 unit-test-junit = '4.13.2'
@@ -43,8 +43,8 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
 
 # Third Party
-third-party-reachard-di = { group = "com.github.kuyucuburak.Reachard", name = "reachard-di", version.ref = "third-party-reachard" }
-third-party-reachard-namifier = { group = "com.github.kuyucuburak.Reachard", name = "reachard-namifier", version.ref = "third-party-reachard" }
+third-party-reachard-di = { group = "com.github.kuyucuburak.reachard", name = "reachard-di", version.ref = "third-party-reachard" }
+third-party-reachard-namifier = { group = "com.github.kuyucuburak.reachard", name = "reachard-namifier", version.ref = "third-party-reachard" }
 
 # Unit Test
 unit-test-junit = { group = "junit", name = "junit", version.ref = "unit-test-junit" }
