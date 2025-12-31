@@ -1,6 +1,6 @@
 package com.kuyucuburak.reachard.namifier.namifier
 
-import com.kuyucuburak.reachard.namifier.namifier.base.NamifierBase
+import com.kuyucuburak.reachard.namifier.base.NamifierBase
 
 internal object SentenceCaseNamifier : NamifierBase() {
 

@@ -1,4 +1,4 @@
-package com.kuyucuburak.reachard.namifier.namifier.base
+package com.kuyucuburak.reachard.namifier.base
 
 abstract class NamifierBase {
 

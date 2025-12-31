@@ -16,31 +16,34 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
 
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
         }
     }
 
     defaultConfig {
         applicationId = "com.kuyucuburak.reachard.sample"
 
-        versionCode = rootProject.extra["versionCode"] as Int
-        versionName = rootProject.extra["versionName"] as String
+        versionCode = 1
+        versionName = "1.0.0"
     }
 }
 
 dependencies {
-    // Reachard
-    implementation(libs.reachard.di)
-    implementation(libs.reachard.namifier)
-
-    // AndroidX
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-
-    // Jetpack Compose
+    // BOM Compose
     implementation(platform(libs.bom.compose))
     implementation(libs.bom.compose.material3)
     implementation(libs.bom.compose.runtime.livedata)
     implementation(libs.bom.compose.ui)
     implementation(libs.bom.compose.ui.tooling)
+
+    // AndroidX
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    // Third Party
+    implementation(libs.third.party.reachard.di)
+    implementation(libs.third.party.reachard.namifier)
 }

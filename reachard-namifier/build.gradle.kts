@@ -11,5 +11,5 @@ android {
 
 dependencies {
     // Unit Test
-    testImplementation(libs.tp.junit)
+    testImplementation(libs.unit.test.junit)
 }

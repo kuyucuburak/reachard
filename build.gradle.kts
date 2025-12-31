@@ -1,23 +1,6 @@
+import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
-
-buildscript {
-    val buildNumber = System.getenv("BUILD_NUMBER")?.toInt() ?: 1
-
-    extra.apply {
-        set("versionMajor", 1)
-        set("versionMinor", 0)
-        set("versionPatch", 0)
-
-        set("versionBuild", buildNumber)
-        set("versionCode", (extra["versionMajor"] as Int) * 10000000 + (extra["versionMinor"] as Int) * 100000 + (extra["versionPatch"] as Int) * 1000 + (extra["versionBuild"] as Int))
-        set("versionName", "${extra["versionMajor"]}.${extra["versionMinor"]}.${extra["versionPatch"]}")
-
-        set("minSdkVersion", 21)
-        set("targetSdkVersion", 35)
-        set("compileSdkVersion", 35)
-    }
-}
 
 plugins {
     alias(libs.plugins.android.application) apply false
@@ -30,22 +13,28 @@ subprojects {
     afterEvaluate {
         if (plugins.hasPlugin("com.android.application") || plugins.hasPlugin("com.android.library")) {
             extensions.configure<BaseExtension> {
-                compileSdkVersion(rootProject.extra["compileSdkVersion"] as Int)
-
                 compileOptions {
                     sourceCompatibility = JavaVersion.VERSION_17
                     targetCompatibility = JavaVersion.VERSION_17
                 }
 
                 defaultConfig {
-                    minSdk = rootProject.extra["minSdkVersion"] as Int
-                    targetSdk = rootProject.extra["targetSdkVersion"] as Int
+                    minSdk = libs.versions.sdk.min.get().toInt()
+                    targetSdk = libs.versions.sdk.target.get().toInt()
                 }
+            }
+        }
+
+        if (plugins.hasPlugin("com.android.application")) {
+            extensions.configure<ApplicationExtension> {
+                compileSdk = libs.versions.sdk.compile.get().toInt()
             }
         }
 
         if (plugins.hasPlugin("com.android.library")) {
             extensions.configure<LibraryExtension> {
+                compileSdk = libs.versions.sdk.compile.get().toInt()
+
                 buildTypes.configureEach {
                     consumerProguardFiles("consumer-proguard-rules.pro")
                 }

@@ -1,12 +1,11 @@
-package com.kuyucuburak.reachard.di
+package com.kuyucuburak.reachard.di.test
 
+import com.kuyucuburak.reachard.di.ReachardDI
 import com.kuyucuburak.reachard.di.enums.PutConflictStrategyEnums
 import com.kuyucuburak.reachard.di.exception.NoReachardInstanceFoundException
 import com.kuyucuburak.reachard.di.exception.ReachardInstanceAlreadyExistsException
 import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotEquals
-import org.junit.Assert.fail
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
@@ -36,22 +35,22 @@ class ReachardDITest {
 
     @Test
     fun defaultPutConflictStrategy() {
-        assertEquals(ReachardDI.defaultPutConflictStrategy, PutConflictStrategyEnums.CRASH)
+        Assert.assertEquals(ReachardDI.defaultPutConflictStrategy, PutConflictStrategyEnums.CRASH)
     }
 
     @Test
     fun defaultLazyPutConflictStrategy() {
-        assertEquals(ReachardDI.defaultLazyPutConflictStrategy, PutConflictStrategyEnums.UPDATE)
+        Assert.assertEquals(ReachardDI.defaultLazyPutConflictStrategy, PutConflictStrategyEnums.UPDATE)
     }
 
     @Test
     fun instanceCount() {
-        assertEquals(ReachardDI.instanceCount, 2)
+        Assert.assertEquals(ReachardDI.instanceCount, 2)
     }
 
     @Test
     fun lazyInstanceCount() {
-        assertEquals(ReachardDI.lazyInstanceCount, 1)
+        Assert.assertEquals(ReachardDI.lazyInstanceCount, 1)
     }
 
     @Test
@@ -61,15 +60,15 @@ class ReachardDITest {
             defaultLazyPutConflictStrategy = PutConflictStrategyEnums.CRASH,
         )
 
-        assertEquals(ReachardDI.defaultPutConflictStrategy, PutConflictStrategyEnums.UPDATE)
-        assertEquals(ReachardDI.defaultLazyPutConflictStrategy, PutConflictStrategyEnums.CRASH)
+        Assert.assertEquals(ReachardDI.defaultPutConflictStrategy, PutConflictStrategyEnums.UPDATE)
+        Assert.assertEquals(ReachardDI.defaultLazyPutConflictStrategy, PutConflictStrategyEnums.CRASH)
     }
 
     @Test
     fun put_putConflictStrategyCrash_conflictWithNormalInstance() {
         try {
             ReachardDI.put(fooTest, key = keyNormal1, putConflictStrategy = PutConflictStrategyEnums.CRASH)
-            fail("This should fail!")
+            Assert.fail("This should fail!")
         } catch (_: ReachardInstanceAlreadyExistsException) {
             // success
         }
@@ -79,23 +78,23 @@ class ReachardDITest {
     fun put_putConflictStrategySkip_conflictWithNormalInstance() {
         ReachardDI.put(fooTest, key = keyNormal1, putConflictStrategy = PutConflictStrategyEnums.SKIP)
 
-        assertEquals(ReachardDI.get<Foo>(key = keyNormal1), fooNormal1)
-        assertNotEquals(ReachardDI.get<Foo>(key = keyNormal1), fooTest)
+        Assert.assertEquals(ReachardDI.get<Foo>(key = keyNormal1), fooNormal1)
+        Assert.assertNotEquals(ReachardDI.get<Foo>(key = keyNormal1), fooTest)
     }
 
     @Test
     fun put_putConflictStrategyUpdate_conflictWithNormalInstance() {
         ReachardDI.put(fooTest, key = keyNormal1, putConflictStrategy = PutConflictStrategyEnums.UPDATE)
 
-        assertNotEquals(ReachardDI.get<Foo>(key = keyNormal1), fooNormal1)
-        assertEquals(ReachardDI.get<Foo>(key = keyNormal1), fooTest)
+        Assert.assertNotEquals(ReachardDI.get<Foo>(key = keyNormal1), fooNormal1)
+        Assert.assertEquals(ReachardDI.get<Foo>(key = keyNormal1), fooTest)
     }
 
     @Test
     fun put_putConflictStrategyCrash_conflictWithLazyInstance() {
         try {
             ReachardDI.put(fooTest, key = keyForLazy, putConflictStrategy = PutConflictStrategyEnums.CRASH)
-            fail("This should fail!")
+            Assert.fail("This should fail!")
         } catch (_: ReachardInstanceAlreadyExistsException) {
             // success
         }
@@ -105,26 +104,26 @@ class ReachardDITest {
     fun put_putConflictStrategySkip_conflictWithLazyInstance() {
         ReachardDI.put(fooTest, key = keyForLazy, putConflictStrategy = PutConflictStrategyEnums.SKIP)
 
-        assertEquals(ReachardDI.get<Foo>(key = keyForLazy), fooForLazy)
-        assertNotEquals(ReachardDI.get<Foo>(key = keyForLazy), fooTest)
+        Assert.assertEquals(ReachardDI.get<Foo>(key = keyForLazy), fooForLazy)
+        Assert.assertNotEquals(ReachardDI.get<Foo>(key = keyForLazy), fooTest)
     }
 
     @Test
     fun put_putConflictStrategyUpdate_conflictWithLazyInstance() {
         ReachardDI.put(fooTest, key = keyForLazy, putConflictStrategy = PutConflictStrategyEnums.UPDATE)
 
-        assertEquals(ReachardDI.instanceCount, 3)
-        assertEquals(ReachardDI.lazyInstanceCount, 0)
+        Assert.assertEquals(ReachardDI.instanceCount, 3)
+        Assert.assertEquals(ReachardDI.lazyInstanceCount, 0)
 
-        assertNotEquals(ReachardDI.get<Foo>(key = keyForLazy), fooForLazy)
-        assertEquals(ReachardDI.get<Foo>(key = keyForLazy), fooTest)
+        Assert.assertNotEquals(ReachardDI.get<Foo>(key = keyForLazy), fooForLazy)
+        Assert.assertEquals(ReachardDI.get<Foo>(key = keyForLazy), fooTest)
     }
 
     @Test
     fun lazyPut_putConflictStrategyCrash_conflictWithLazyInstance() {
         try {
             ReachardDI.lazyPut({ fooTest }, key = keyForLazy, putConflictStrategy = PutConflictStrategyEnums.CRASH)
-            fail("This should fail!")
+            Assert.fail("This should fail!")
         } catch (_: ReachardInstanceAlreadyExistsException) {
             // success
         }
@@ -134,23 +133,23 @@ class ReachardDITest {
     fun lazyPut_putConflictStrategySkip_conflictWithLazyInstance() {
         ReachardDI.lazyPut({ fooTest }, key = keyForLazy, putConflictStrategy = PutConflictStrategyEnums.SKIP)
 
-        assertEquals(ReachardDI.get<Foo>(key = keyForLazy), fooForLazy)
-        assertNotEquals(ReachardDI.get<Foo>(key = keyForLazy), fooTest)
+        Assert.assertEquals(ReachardDI.get<Foo>(key = keyForLazy), fooForLazy)
+        Assert.assertNotEquals(ReachardDI.get<Foo>(key = keyForLazy), fooTest)
     }
 
     @Test
     fun lazyPut_putConflictStrategyUpdate_conflictWithLazyInstance() {
         ReachardDI.lazyPut({ fooTest }, key = keyForLazy, putConflictStrategy = PutConflictStrategyEnums.UPDATE)
 
-        assertNotEquals(ReachardDI.get<Foo>(key = keyForLazy), fooForLazy)
-        assertEquals(ReachardDI.get<Foo>(key = keyForLazy), fooTest)
+        Assert.assertNotEquals(ReachardDI.get<Foo>(key = keyForLazy), fooForLazy)
+        Assert.assertEquals(ReachardDI.get<Foo>(key = keyForLazy), fooTest)
     }
 
     @Test
     fun lazyPut_putConflictStrategyCrash_conflictWithNormalInstance() {
         try {
             ReachardDI.lazyPut({ fooTest }, key = keyNormal1, putConflictStrategy = PutConflictStrategyEnums.CRASH)
-            fail("This should fail!")
+            Assert.fail("This should fail!")
         } catch (_: ReachardInstanceAlreadyExistsException) {
             // success
         }
@@ -160,60 +159,60 @@ class ReachardDITest {
     fun lazyPut_putConflictStrategySkip_conflictWithNormalInstance() {
         ReachardDI.lazyPut({ fooTest }, key = keyNormal1, putConflictStrategy = PutConflictStrategyEnums.SKIP)
 
-        assertEquals(ReachardDI.get<Foo>(key = keyNormal1), fooNormal1)
-        assertNotEquals(ReachardDI.get<Foo>(key = keyNormal1), fooTest)
+        Assert.assertEquals(ReachardDI.get<Foo>(key = keyNormal1), fooNormal1)
+        Assert.assertNotEquals(ReachardDI.get<Foo>(key = keyNormal1), fooTest)
     }
 
     @Test
     fun lazyPut_putConflictStrategyUpdate_conflictWithNormalInstance() {
         ReachardDI.lazyPut({ fooTest }, key = keyNormal1, putConflictStrategy = PutConflictStrategyEnums.UPDATE)
 
-        assertEquals(ReachardDI.instanceCount, 1)
-        assertEquals(ReachardDI.lazyInstanceCount, 2)
+        Assert.assertEquals(ReachardDI.instanceCount, 1)
+        Assert.assertEquals(ReachardDI.lazyInstanceCount, 2)
 
-        assertNotEquals(ReachardDI.get<Foo>(key = keyNormal1), fooNormal1)
-        assertEquals(ReachardDI.get<Foo>(key = keyNormal1), fooTest)
+        Assert.assertNotEquals(ReachardDI.get<Foo>(key = keyNormal1), fooNormal1)
+        Assert.assertEquals(ReachardDI.get<Foo>(key = keyNormal1), fooTest)
     }
 
     @Test
     fun remove_normalInstance() {
         ReachardDI.remove<Foo>(keyNormal1)
 
-        assertEquals(ReachardDI.instanceCount, 1)
-        assertEquals(ReachardDI.lazyInstanceCount, 1)
+        Assert.assertEquals(ReachardDI.instanceCount, 1)
+        Assert.assertEquals(ReachardDI.lazyInstanceCount, 1)
 
-        assertEquals(ReachardDI.contains<Foo>(key = keyNormal1), false)
+        Assert.assertEquals(ReachardDI.contains<Foo>(key = keyNormal1), false)
     }
 
     @Test
     fun remove_lazyInstance() {
         ReachardDI.remove<Foo>(keyForLazy)
 
-        assertEquals(ReachardDI.instanceCount, 2)
-        assertEquals(ReachardDI.lazyInstanceCount, 0)
+        Assert.assertEquals(ReachardDI.instanceCount, 2)
+        Assert.assertEquals(ReachardDI.lazyInstanceCount, 0)
 
-        assertEquals(ReachardDI.contains<Foo>(key = keyForLazy), false)
+        Assert.assertEquals(ReachardDI.contains<Foo>(key = keyForLazy), false)
     }
 
     @Test
     fun get_normalInstance() {
-        assertEquals(ReachardDI.get<Foo>(key = keyNormal1), fooNormal1)
-        assertEquals(ReachardDI.instanceCount, 2)
-        assertEquals(ReachardDI.lazyInstanceCount, 1)
+        Assert.assertEquals(ReachardDI.get<Foo>(key = keyNormal1), fooNormal1)
+        Assert.assertEquals(ReachardDI.instanceCount, 2)
+        Assert.assertEquals(ReachardDI.lazyInstanceCount, 1)
     }
 
     @Test
     fun get_lazyInstance() {
-        assertEquals(ReachardDI.get<Foo>(key = keyForLazy), fooForLazy)
-        assertEquals(ReachardDI.instanceCount, 3)
-        assertEquals(ReachardDI.lazyInstanceCount, 0)
+        Assert.assertEquals(ReachardDI.get<Foo>(key = keyForLazy), fooForLazy)
+        Assert.assertEquals(ReachardDI.instanceCount, 3)
+        Assert.assertEquals(ReachardDI.lazyInstanceCount, 0)
     }
 
     @Test
     fun get_noReachardInstanceFoundException() {
         try {
             ReachardDI.get<Foo>(key = unknownKey)
-            fail("This must fail!")
+            Assert.fail("This must fail!")
         } catch (_: NoReachardInstanceFoundException) {
             // success
         }
@@ -221,29 +220,29 @@ class ReachardDITest {
 
     @Test
     fun contains_normalInstance() {
-        assertEquals(ReachardDI.contains<Foo>(key = keyNormal1), true)
-        assertEquals(ReachardDI.contains<Foo>(key = keyNormal2), true)
+        Assert.assertEquals(ReachardDI.contains<Foo>(key = keyNormal1), true)
+        Assert.assertEquals(ReachardDI.contains<Foo>(key = keyNormal2), true)
     }
 
     @Test
     fun contains_lazyInstance() {
-        assertEquals(ReachardDI.contains<Foo>(key = keyForLazy), true)
+        Assert.assertEquals(ReachardDI.contains<Foo>(key = keyForLazy), true)
     }
 
     @Test
     fun contains_notFound() {
-        assertEquals(ReachardDI.contains<Foo>(), false)
+        Assert.assertEquals(ReachardDI.contains<Foo>(), false)
     }
 
     @Test
     fun reset() {
         ReachardDI.reset()
 
-        assertEquals(ReachardDI.defaultPutConflictStrategy, PutConflictStrategyEnums.CRASH)
-        assertEquals(ReachardDI.defaultLazyPutConflictStrategy, PutConflictStrategyEnums.UPDATE)
+        Assert.assertEquals(ReachardDI.defaultPutConflictStrategy, PutConflictStrategyEnums.CRASH)
+        Assert.assertEquals(ReachardDI.defaultLazyPutConflictStrategy, PutConflictStrategyEnums.UPDATE)
 
-        assertEquals(ReachardDI.instanceCount, 0)
-        assertEquals(ReachardDI.lazyInstanceCount, 0)
+        Assert.assertEquals(ReachardDI.instanceCount, 0)
+        Assert.assertEquals(ReachardDI.lazyInstanceCount, 0)
     }
 
     private class Foo

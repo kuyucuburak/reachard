@@ -10,7 +10,7 @@ import com.kuyucuburak.reachard.namifier.namifier.SentenceCaseNamifier
 import com.kuyucuburak.reachard.namifier.namifier.SnakeCaseNamifier
 import com.kuyucuburak.reachard.namifier.namifier.TitleCaseNamifier
 import com.kuyucuburak.reachard.namifier.namifier.TrainCaseNamifier
-import com.kuyucuburak.reachard.namifier.namifier.base.NamifierBase
+import com.kuyucuburak.reachard.namifier.base.NamifierBase
 
 enum class CaseTypeEnums(
     internal val namifier: NamifierBase,

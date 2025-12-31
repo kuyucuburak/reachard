@@ -1,11 +1,19 @@
-*.iml
-.gradle
-/local.properties
-/.idea
+# File - General
+local.properties
+
+# File - Hidden
 .DS_Store
+
+# File - Regex
+*.iml
+
+# Folder - General
 /build
 /captures
-.externalNativeBuild
+
+# Folder - Hidden
 .cxx
-local.properties
-github.properties
+.externalNativeBuild
+.gradle
+.idea
+.kotlin
