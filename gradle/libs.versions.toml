@@ -6,7 +6,7 @@ sdk-target = "36"
 sdk-compile = "36"
 
 # Plugin
-plugin-gradle = '8.13.2'
+plugin-agp = '8.13.2'
 plugin-kotlin = '2.3.0'
 
 # BOM
@@ -24,8 +24,8 @@ unit-test-junit = '4.13.2'
 
 [plugins]
 
-android-application = { id = "com.android.application", version.ref = "plugin-gradle" }
-android-library = { id = "com.android.library", version.ref = "plugin-gradle" }
+android-application = { id = "com.android.application", version.ref = "plugin-agp" }
+android-library = { id = "com.android.library", version.ref = "plugin-agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "plugin-kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "plugin-kotlin" }
 
