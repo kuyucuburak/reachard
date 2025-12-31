@@ -1,4 +1,4 @@
-name: Auto - Eligibility Bot
+name: Auto - Eligibility Inspection
 
 on:
   push:
