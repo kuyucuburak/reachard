@@ -32,9 +32,6 @@ jobs:
       - name: Build workspace
         run: ./gradlew build
 
-      - name: Analyze code
-        run: ./gradlew check
-
       - name: Run tests
         run: |
           ./gradlew :reachard-di:test
