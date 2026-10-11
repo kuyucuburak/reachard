@@ -47,14 +47,12 @@ subprojects {
             }
         }
 
-        // maven-publish is applied by each library module after the Android plugin, so wait for it here.
         plugins.withId("maven-publish") {
             extensions.configure<PublishingExtension> {
                 publications {
                     create<MavenPublication>("maven") {
                         artifactId = project.name
 
-                        // The "release" software component only exists once AGP has evaluated the project.
                         afterEvaluate {
                             from(components["release"])
                         }
