@@ -1,3 +1,13 @@
+@file:Suppress("UnstableApiUsage")
+
+rootProject.name = "reachard"
+
+include(
+    ":reachard-di",
+    ":reachard-namifier",
+    ":sample",
+)
+
 pluginManagement {
     repositories {
         google()
@@ -16,11 +26,3 @@ dependencyResolutionManagement {
         maven(url = "https://jitpack.io")
     }
 }
-
-rootProject.name = "reachard"
-
-include(
-    ":reachard-di",
-    ":reachard-namifier",
-    ":sample",
-)
