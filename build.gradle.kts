@@ -34,8 +34,6 @@ subprojects {
     }
 
     plugins.withId("com.android.library") {
-        apply(plugin = "maven-publish")
-
         extensions.configure<LibraryExtension> {
             defaultConfig {
                 consumerProguardFiles("consumer-proguard-rules.pro")
@@ -49,14 +47,17 @@ subprojects {
             }
         }
 
-        extensions.configure<PublishingExtension> {
-            publications {
-                create<MavenPublication>("maven") {
-                    artifactId = project.name
+        // maven-publish is applied by each library module after the Android plugin, so wait for it here.
+        plugins.withId("maven-publish") {
+            extensions.configure<PublishingExtension> {
+                publications {
+                    create<MavenPublication>("maven") {
+                        artifactId = project.name
 
-                    // The "release" software component is only registered once AGP has evaluated the project.
-                    afterEvaluate {
-                        from(components["release"])
+                        // The "release" software component only exists once AGP has evaluated the project.
+                        afterEvaluate {
+                            from(components["release"])
+                        }
                     }
                 }
             }
