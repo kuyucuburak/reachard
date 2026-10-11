@@ -6,21 +6,21 @@ sdk-target = "37"
 sdk-compile = "37"
 
 # Plugin
-plugin-agp = '9.4.1'
-plugin-kotlin = '2.4.21'
+plugin-agp = "9.4.1"
+plugin-kotlin = "2.4.21"
 
 # BOM
-bom-compose = '2026.09.00'
+bom-compose = "2026.09.00"
 
 # AndroidX
-androidx-activity-compose = '1.13.0'
-androidx-lifecycle = '2.11.0'
+androidx-activity-compose = "1.13.0"
+androidx-lifecycle = "2.11.0"
 
 # Third Party
-third-party-reachard = '2.2.1'
+third-party-reachard = "2.2.1"
 
 # Unit Test
-unit-test-junit = '4.13.2'
+unit-test-junit = "4.13.2"
 
 [plugins]
 

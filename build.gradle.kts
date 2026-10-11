@@ -1,6 +1,7 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryExtension
+import com.android.build.gradle.api.AndroidBasePlugin
 
 plugins {
     alias(libs.plugins.android.application) apply false
@@ -9,52 +10,53 @@ plugins {
 }
 
 subprojects {
-    afterEvaluate {
-        if (plugins.hasPlugin("com.android.application") || plugins.hasPlugin("com.android.library")) {
-            extensions.configure<CommonExtension> {
-                compileSdk = libs.versions.sdk.compile.get().toInt()
+    plugins.withType<AndroidBasePlugin> {
+        extensions.configure<CommonExtension> {
+            compileSdk = libs.versions.sdk.compile.get().toInt()
 
-                compileOptions.apply {
-                    sourceCompatibility = JavaVersion.VERSION_17
-                    targetCompatibility = JavaVersion.VERSION_17
-                }
+            compileOptions.apply {
+                sourceCompatibility = JavaVersion.VERSION_17
+                targetCompatibility = JavaVersion.VERSION_17
+            }
 
-                defaultConfig.apply {
-                    minSdk = libs.versions.sdk.min.get().toInt()
+            defaultConfig.apply {
+                minSdk = libs.versions.sdk.min.get().toInt()
+            }
+        }
+    }
+
+    plugins.withId("com.android.application") {
+        extensions.configure<ApplicationExtension> {
+            defaultConfig {
+                targetSdk = libs.versions.sdk.target.get().toInt()
+            }
+        }
+    }
+
+    plugins.withId("com.android.library") {
+        apply(plugin = "maven-publish")
+
+        extensions.configure<LibraryExtension> {
+            defaultConfig {
+                consumerProguardFiles("consumer-proguard-rules.pro")
+            }
+
+            publishing {
+                singleVariant("release") {
+                    withSourcesJar()
+                    withJavadocJar()
                 }
             }
         }
 
-        if (plugins.hasPlugin("com.android.application")) {
-            extensions.configure<ApplicationExtension> {
-                defaultConfig {
-                    targetSdk = libs.versions.sdk.target.get().toInt()
-                }
-            }
-        }
+        extensions.configure<PublishingExtension> {
+            publications {
+                create<MavenPublication>("maven") {
+                    artifactId = project.name
 
-        if (plugins.hasPlugin("com.android.library")) {
-            extensions.configure<LibraryExtension> {
-                buildTypes.configureEach {
-                    consumerProguardFiles("consumer-proguard-rules.pro")
-                }
-
-                publishing {
-                    singleVariant("release") {
-                        withSourcesJar()
-                        withJavadocJar()
-                    }
-                }
-            }
-
-            extensions.configure<PublishingExtension> {
-                publications {
-                    create<MavenPublication>("maven") {
-                        artifactId = project.name
-
-                        afterEvaluate {
-                            from(components.getByName("release"))
-                        }
+                    // The "release" software component is only registered once AGP has evaluated the project.
+                    afterEvaluate {
+                        from(components["release"])
                     }
                 }
             }
