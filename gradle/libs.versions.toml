@@ -2,19 +2,19 @@
 
 # Sdk
 sdk-min = "24"
-sdk-target = "36"
-sdk-compile = "36"
+sdk-target = "37"
+sdk-compile = "37"
 
 # Plugin
-plugin-agp = '8.13.2'
-plugin-kotlin = '2.3.0'
+plugin-agp = '9.4.1'
+plugin-kotlin = '2.4.21'
 
 # BOM
-bom-compose = '2025.12.01'
+bom-compose = '2026.09.00'
 
 # AndroidX
-androidx-activity-compose = '1.12.2'
-androidx-lifecycle = '2.10.0'
+androidx-activity-compose = '1.13.0'
+androidx-lifecycle = '2.11.0'
 
 # Third Party
 third-party-reachard = '2.2.1'
@@ -26,7 +26,6 @@ unit-test-junit = '4.13.2'
 
 android-application = { id = "com.android.application", version.ref = "plugin-agp" }
 android-library = { id = "com.android.library", version.ref = "plugin-agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "plugin-kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "plugin-kotlin" }
 
 [libraries]
