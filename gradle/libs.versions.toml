@@ -17,7 +17,7 @@ androidx-activity-compose = "1.13.0"
 androidx-lifecycle = "2.11.0"
 
 # Third Party
-third-party-reachard = "2.2.1"
+third-party-reachard = "3.0.1"
 
 # Unit Test
 unit-test-junit = "4.13.2"
